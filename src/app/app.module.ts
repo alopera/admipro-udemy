@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 
 //Componentes
@@ -15,6 +16,7 @@ import { APP_ROUTES } from './app.routes';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     APP_ROUTES,
-    PagesModule
+    PagesModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
