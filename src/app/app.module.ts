@@ -13,6 +13,8 @@ import { PagesModule } from "./pages/pages.module";
 
 //Rutas
 import { APP_ROUTES } from './app.routes';
+import { ServiceModule } from './services/service.module';
+
 
 
 
@@ -27,7 +29,8 @@ import { APP_ROUTES } from './app.routes';
     BrowserModule,
     APP_ROUTES,
     PagesModule,
-    FormsModule
+    FormsModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
