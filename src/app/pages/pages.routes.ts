@@ -5,11 +5,13 @@ import { ProgressComponent } from "./progress/progress.component";
 import { Graficas1Component } from "./graficas1/graficas1.component";
 import { PagesComponent } from "./pages.component";
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { LoginGuardGuard } from '../services/service.index';
 
 const pagesRoutes: Routes = [
   {
     path: "",
     component: PagesComponent,
+    canActivate: [LoginGuardGuard],
     children: [
       { path: "dashboard", component: DashboardComponent, data: {titulo: 'Dashboard'} },
       { path: "progress", component: ProgressComponent, data: {titulo: 'Barra de Progreso'} },

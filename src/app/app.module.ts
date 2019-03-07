@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 //Componentes
 import { AppComponent } from "./app.component";
@@ -16,7 +16,7 @@ import { ServiceModule } from "./services/service.module";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],
-  imports: [BrowserModule, APP_ROUTES, PagesModule, FormsModule, ServiceModule],
+  imports: [BrowserModule, APP_ROUTES, PagesModule, FormsModule, ServiceModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
