@@ -6,6 +6,7 @@ import { Graficas1Component } from "./graficas1/graficas1.component";
 import { PagesComponent } from "./pages.component";
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { ProfileComponent } from './profile/profile.component';
 
 const pagesRoutes: Routes = [
   {
@@ -17,6 +18,7 @@ const pagesRoutes: Routes = [
       { path: "progress", component: ProgressComponent, data: {titulo: 'Barra de Progreso'} },
       { path: "graficas1", component: Graficas1Component, data: {titulo: 'Gráficas'} },
       { path: "accountSettings", component: AccountSettingsComponent, data: {titulo: 'Configuracion Cuenta'} },
+      { path: "profile", component: ProfileComponent, data: {titulo: 'Perfil de usuario'} },
       { path: "observable", component: RxjsComponent, data: {titulo: 'Observables'} },
       { path: "", redirectTo: "/dashboard", pathMatch: "full" }
     ]

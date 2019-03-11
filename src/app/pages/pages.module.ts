@@ -11,6 +11,8 @@ import { ChartsModule } from "ng2-charts";
 import { GraficoDonaComponent } from "./graficas1/grafico-dona/grafico-dona.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from "../pipes/pipes.module";
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     IncremetadorComponent,
     GraficoDonaComponent,
     AccountSettingsComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent
   ],
   exports: [
     DashboardComponent,
@@ -30,6 +33,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     Graficas1Component,
     IncremetadorComponent
   ],
-  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule]
+  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule, PipesModule]
 })
 export class PagesModule {}
