@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.googleInit();
 
     this.email = localStorage.getItem('email') || '';
-    if (this.email.length > 1) {
+    if ( this.email.length > 1 ) {
       this.recuerdame = true;
     }
 
@@ -46,28 +46,39 @@ export class LoginComponent implements OnInit {
         scope: 'profile email'
       });
 
-      this.attachSignin(document.getElementById('btnGoogle'));
+      this.attachSignin( document.getElementById('btnGoogle') );
 
     });
 
   }
 
-  attachSignin(element) {
-    this.auth2.attachClickHandler(element, {}, (googleUser) => {
+  attachSignin( element ) {
+
+    this.auth2.attachClickHandler( element, {}, (googleUser) => {
+
+      // let profile = googleUser.getBasicProfile();
       let token = googleUser.getAuthResponse().id_token;
-      this._usuarioService.loginGoogle(token)
-        .subscribe(() => window.location.href = '#/dashboard');
+
+      this._usuarioService.loginGoogle( token )
+              .subscribe( () => window.location.href = '#/dashboard'  );
+
     });
+
   }
 
-  ingresar(forma: NgForm) {
 
-    if (forma.invalid) {
+  ingresar( forma: NgForm) {
+
+    if ( forma.invalid ) {
       return;
     }
-    let usuario = new Usuario(null, forma.value.email, forma.value.password);
-    this._usuarioService.login(usuario, forma.value.recuerdame)
-      .subscribe(correcto => this.router.navigate(['/dashboard']));
+
+    let usuario = new Usuario(null, forma.value.email, forma.value.password );
+
+    this._usuarioService.login( usuario, forma.value.recuerdame )
+                  .subscribe( correcto => this.router.navigate(['/dashboard'])  );
+
+    // this.router.navigate([ '/dashboard' ]);
 
   }
 
