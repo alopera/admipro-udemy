@@ -1,62 +1,85 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscriber, Subscription } from 'rxjs';
-import { retry, map, filter } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
+// tslint:disable-next-line:import-blacklist
+import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-rxjs',
   templateUrl: './rxjs.component.html',
-  styleUrls: ['./rxjs.component.css']
+  styles: []
 })
 export class RxjsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
+
   constructor() {
 
-   this.subscription = this.retornaObservable().subscribe(
-      numero => console.log(numero),
-      error => console.log(error),
-      () => console.log('El observador terminó')
-    );
+    this.subscription = this.regresaObservable()
+      .subscribe(
+          numero => console.log( 'Subs', numero ),
+          error => console.error('Error en el obs (dos veces)', error ),
+          () => console.log( 'El observador termino!' )
+        );
+
+
   }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  retornaObservable(): Observable<any> {
+  regresaObservable(): Observable<any> {
 
-    return new Observable((observable: Subscriber<any>) => {
-      let contador = 1;
-      const intervalo = setInterval(() => {
-        contador += 1;
-        const salida = {
-          valor: contador
-        };
-        observable.next( salida );
-        // if (contador === 3) {
-        //   clearInterval(intervalo);
-        //   observable.complete();
-        // }
+    return new Observable( observer => {
 
-   
-      }, 1000);
-    }).pipe(
-      map(resp => {
-        return resp.valor;
-      }),
-      filter((valor, index) => {
-          if ((valor % 2) !== 0) {
-            return true;
-          } else {
-            return false;
-          }
-      })
-    );
+    let contador = 0;
+
+    let intervalo = setInterval( () => {
+
+      contador += 1;
+
+      let salida = {
+        valor: contador
+      };
+
+      observer.next( salida );
+
+      // if ( contador === 3 ) {
+      //   clearInterval( intervalo );
+      //   observer.complete();
+      // }
+
+      // if ( contador === 2 ) {
+      //   observer.error('Auxilio!');
+      // }
+
+    }, 500 );
+
+  })
+  .retry(2)
+  .map( (resp: any) => {
+
+    return resp.valor;
+  })
+  .filter( (valor, index) => {
+
+    if ( (valor % 2) === 1 ) {
+      // impar
+      return true;
+    }else {
+      // par
+      return false;
+    }
+
+  });
+
+
   }
 
 }
+
+
+
