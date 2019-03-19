@@ -22,7 +22,7 @@ export class MedicoService {
               .map( (resp: any) => {
 
                 this.totalMedicos = resp.total;
-                return resp;
+                return resp.medicos;
               });
 
   }

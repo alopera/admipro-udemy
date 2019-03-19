@@ -26,12 +26,12 @@ export class MedicoComponent implements OnInit {
     public _modalUploadService: ModalUploadService
   ) {
 
-    activatedRoute.params.subscribe(params => {
+    activatedRoute.params.subscribe( params => {
 
       let id = params['id'];
 
-      if (id !== 'nuevo') {
-        this.cargarMedico(id);
+      if ( id !== 'nuevo' ) {
+        this.cargarMedico( id );
       }
 
     });
@@ -41,52 +41,58 @@ export class MedicoComponent implements OnInit {
   ngOnInit() {
 
     this._hospitalService.cargarHospitales()
-      .subscribe(hospitales => this.hospitales = hospitales);
+          .subscribe( hospitales => this.hospitales = hospitales );
 
     this._modalUploadService.notificacion
-      .subscribe(resp => {
-        this.medico.img = resp.medico.img;
-      });
+          .subscribe( resp => {
+            this.medico.img = resp.medico.img;
+          });
 
   }
 
-  cargarMedico(id: string) {
-    this._medicoService.cargarMedico(id)
-      .subscribe(medico => {
+  cargarMedico( id: string ) {
+    this._medicoService.cargarMedico( id )
+          .subscribe( medico => {
 
-        console.log(medico);
-        this.medico = medico;
-        this.medico.hospital = medico.hospital._id;
-        this.cambioHospital(this.medico.hospital);
-      });
+            console.log( medico );
+            this.medico = medico;
+            this.medico.hospital = medico.hospital._id;
+            this.cambioHospital( this.medico.hospital );
+          });
   }
 
-  guardarMedico(f: NgForm) {
+  guardarMedico( f: NgForm ) {
 
-    console.log(f.valid);
-    console.log(f.value);
+    console.log( f.valid );
+    console.log( f.value );
 
-    if (f.invalid) {
+    if ( f.invalid ) {
       return;
     }
 
-    this._medicoService.guardarMedico(this.medico)
-      .subscribe(medico => {
+    this._medicoService.guardarMedico( this.medico )
+            .subscribe( medico => {
 
-        this.medico._id = medico._id;
+              this.medico._id = medico._id;
 
-        this.router.navigate(['/medico', medico._id]);
+              this.router.navigate(['/medico', medico._id ]);
 
-      });
+            });
+
   }
 
-  cambioHospital(id: string) {
-    this._hospitalService.obtenerHospital(id)
-      .subscribe(hospital => this.hospital = hospital);
+  cambioHospital( id: string ) {
+
+    this._hospitalService.obtenerHospital( id )
+          .subscribe( hospital => this.hospital = hospital );
+
   }
 
   cambiarFoto() {
-    this._modalUploadService.mostrarModal('medicos', this.medico._id);
+
+    this._modalUploadService.mostrarModal( 'medicos', this.medico._id );
+
   }
+
 
 }
